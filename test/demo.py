@@ -26,10 +26,11 @@ def ocr_image(filename, config):
     print("the image content: %s", text)
 
 
-def show_image():
-    global image, gray
-    cv2.imshow("Image", image)
-    cv2.imshow("Output", gray)
+def show_image(*images):
+    print(type(images))
+    print(type(images[0]))
+    cv2.imshow("Image", images[0])
+    cv2.imshow("Output", images[1])
     cv2.waitKey(0)
 
 
@@ -38,12 +39,13 @@ if __name__ == '__main__':
     args = cmd_args(argparse.ArgumentParser())
 
     # generate pre-process the image
-    if args is None: exit(1)
-    proceed_image_name = preprocess_image(args)
+    if args is None:
+        exit(1)
+    image, gray, gray_filename = preprocess_image(args["image"], args["preprocess"])
 
     # ocr by tesseract
     custom_config = r'--oem 3 --psm 6'
-    ocr_image(proceed_image_name, custom_config)
+    ocr_image(gray_filename, custom_config)
 
     # show the output images
-    show_image()
+    show_image(image, gray)
