@@ -26,3 +26,8 @@
     
 4. enjoy! 
     
+### Run Demo
+
+under the test sub-folder, we can test the installation is proper or not
+
+<code>$ python demo.py --image demo/noisy.png --preprocess blur </code>
