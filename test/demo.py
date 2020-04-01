@@ -1,11 +1,8 @@
 import argparse
-import os
 
 import cv2
-import pytesseract
-from PIL import Image
 
-from model.image_processor import preprocess_image
+from model.image_processor import preprocess_image_with_filename, ocr_image
 
 image = None
 gray = None
@@ -17,13 +14,6 @@ def cmd_args(ap=None):
     ap.add_argument("-i", "--image", required=True, help="path to input image to be OCR'd")
     ap.add_argument("-p", "--preprocess", type=str, default="thresh", help="type of preprocessing to be done")
     return vars(ap.parse_args())
-
-
-def ocr_image(filename, config):
-    # load the image as a PIL/Pillow image, apply OCR, and then delete the temporary file
-    text = pytesseract.image_to_string(image=Image.open(filename), config=config)
-    os.remove(filename)
-    print("the image content: %s", text)
 
 
 def show_image(*images):
@@ -41,11 +31,10 @@ if __name__ == '__main__':
     # generate pre-process the image
     if args is None:
         exit(1)
-    image, gray, gray_filename = preprocess_image(args["image"], args["preprocess"])
+    image, gray = preprocess_image_with_filename(args["image"], args["preprocess"])
 
     # ocr by tesseract
-    custom_config = r'--oem 3 --psm 6'
-    ocr_image(gray_filename, custom_config)
+    ocr_image(gray)
 
     # show the output images
     show_image(image, gray)

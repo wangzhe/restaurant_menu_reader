@@ -4,3 +4,4 @@ pytesseract
 opencv-python==4.1.2.30 #due to the problem of QT.io, issued in recent Feb 2020
 opencv-contrib-python
 pdf2image
+numpy

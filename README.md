@@ -31,3 +31,10 @@
 under the test sub-folder, we can test the installation is proper or not
 
 <code>$ python demo.py --image demo/noisy.png --preprocess blur </code>
+
+### Run Dev Test
+
+build up a folder named samples, under this folder
++   in dev, build a devset folder
++   in test, build a testset folder
++   in product, build a prodset folder 

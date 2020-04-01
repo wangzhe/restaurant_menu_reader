@@ -24,7 +24,7 @@ def ocrdev():
     menus_dev_set = "./samples/devset"
     for menu_filename in os.listdir(menus_dev_set):
         print(menu_filename)
-        menu_processor.ocr(menu_filename)
+        menu_processor.ocr_menu(menu_filename)
 
     return render_template("about.html")
 
